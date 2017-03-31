@@ -1,3 +1,5 @@
+server:
+  port: 8123
 ---
 grails:
     profile: rest-api
@@ -8,9 +10,9 @@ grails:
             proxies: false
 info:
     app:
-        name: '@info.app.name@'
-        version: '@info.app.version@'
-        grailsVersion: '@info.app.grailsVersion@'
+        name: 'Game of Life'
+        version: '0.0.1'
+        grailsVersion: '3.2.7'
 spring:
     main:
         banner-mode: "off"
