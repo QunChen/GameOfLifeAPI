@@ -4,24 +4,47 @@ import com.google.gson.Gson
 import grails.rest.*
 import grails.converters.*
 
-class GenerationController extends RestfulController<Generation>{
-	static responseFormats = ['json']
+class GenerationController extends RestfulController<Generation> {
+    static responseFormats = ['json']
 
-    def neighbourService
-    def statusService
-    def formatService
+    def algorithmService
 
-    GenerationController(){
+    GenerationController() {
         super(Generation)
     }
 
-    def show(){
+    def index() {
 
-        if(!Generation.get(params.id)){
-            statusService.next(Generation.get(params.int('id')-1))
+        println params
+
+        if (params.patternId) {
+
+            def pattern = Pattern.get(params.patternId)
+
+            if(params.step){
+                def step=Generation.findByPatternAndStep(
+                        pattern, params.step)
+
+                if (!step) {
+                    algorithmService.next(
+                            Generation.findByPatternAndStep(pattern,
+                                    params.int('step') - 1),pattern)
+                }
+
+                respond Generation.findByPatternAndStep(
+                        pattern, params.step).cells
+                return
+            }
+
+
+            respond Generation.findAllByPattern(pattern)
+
+            return
+
+        } else {
+            super.index(10)
         }
 
-        render Generation.get(params.id).cells as JSON
     }
 
 }
