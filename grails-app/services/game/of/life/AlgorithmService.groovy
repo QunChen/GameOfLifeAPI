@@ -11,7 +11,22 @@ class AlgorithmService {
     def statusService
     def trimService
 
-    def next(generation,pattern){
+    def toStep(pattern,targetStep){
+        int currentStep=pattern.generations.max{
+            it.step
+        }.step
+
+        def nextGeneration
+
+        while(currentStep!=targetStep){
+            nextGeneration=next(Generation.findByPatternAndStep(pattern,currentStep),pattern)
+            currentStep++
+        }
+
+        nextGeneration
+    }
+
+    private def next(generation,pattern){
 
         def nextGeneration = initialService.initialNext(generation,pattern)
 

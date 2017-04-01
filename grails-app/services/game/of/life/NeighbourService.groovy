@@ -47,10 +47,6 @@ class NeighbourService {
             }
         }
 
-        println generation
-        println cell
-        println noOfAlives
-
         noOfAlives
     }
 

@@ -21,19 +21,20 @@ class GenerationController extends RestfulController<Generation> {
 
             def pattern = Pattern.get(params.patternId)
 
-            if(params.step){
-                def step=Generation.findByPatternAndStep(
+            if (params.step) {
+                def targetStepGeneration = Generation.findByPatternAndStep(
                         pattern, params.step)
 
-                if (!step) {
-                    algorithmService.next(
-                            Generation.findByPatternAndStep(pattern,
-                                    params.int('step') - 1),pattern)
+                if (!targetStepGeneration) {
+
+                    respond algorithmService.toStep( pattern,
+                            params.int('step')).cells
+                    return
+                }else{
+                    respond targetStepGeneration.cells
+                    return
                 }
 
-                respond Generation.findByPatternAndStep(
-                        pattern, params.step).cells
-                return
             }
 
 
