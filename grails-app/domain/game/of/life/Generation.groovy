@@ -4,6 +4,7 @@ class Generation {
 
     Long id
     Long step
+    Pattern pattern
 
     static hasMany = [cells:Cell]
 
