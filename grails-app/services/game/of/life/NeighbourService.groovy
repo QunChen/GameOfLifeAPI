@@ -5,6 +5,12 @@ import grails.transaction.Transactional
 @Transactional
 class NeighbourService {
 
+    /**
+     * Get number of neighbours
+     * @param cell
+     * @param generation
+     * @return
+     */
     def getNoOfAlives(Cell cell,Generation generation) {
 
         def c = Cell.createCriteria()

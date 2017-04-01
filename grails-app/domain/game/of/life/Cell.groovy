@@ -9,7 +9,7 @@ class Cell {
     Generation generation
 
     static mapping = {
-        version false
+
     }
 
     static constraints = {

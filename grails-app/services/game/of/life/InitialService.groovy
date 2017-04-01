@@ -5,24 +5,17 @@ import grails.transaction.Transactional
 @Transactional
 class InitialService {
 
+    def utilsService
+    /**
+     * Add cells around the original pattern
+     * @param generation
+     * @param pattern
+     * @return
+     */
     def initialNext(generation,pattern){
         def cells=generation.cells
 
-        def maxRow=cells.max{
-            it.row
-        }.row
-
-        def minRow=cells.min{
-            it.row
-        }.row
-
-        def maxCol=cells.max{
-            it.col
-        }.col
-
-        def minCol=cells.min{
-            it.col
-        }.col
+        def (int minRow, int maxRow, int minCol, int maxCol) = utilsService.getBoundaries(cells)
 
         def nextGeneration=new Generation(step: generation.step+1,pattern:pattern).save()
 

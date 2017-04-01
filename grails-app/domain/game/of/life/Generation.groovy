@@ -9,7 +9,7 @@ class Generation {
     static hasMany = [cells:Cell]
 
     static mapping={
-        version false
+
     }
 
     static constraints = {

@@ -8,7 +8,7 @@ class Pattern {
     static hasMany = [generations:Generation]
 
     static mapping={
-        version false
+
     }
 
 
