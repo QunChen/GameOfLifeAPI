@@ -9,6 +9,7 @@ class UrlMappings {
         }
 
         "/patterns"(resources:"pattern"){
+            "/generations"(resources:"generation")
         }
 
         "/"(controller: 'application', action:'index')
