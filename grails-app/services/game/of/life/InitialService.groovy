@@ -5,7 +5,7 @@ import grails.transaction.Transactional
 @Transactional
 class InitialService {
 
-    def initialNext(generation){
+    def initialNext(generation,pattern){
         def cells=generation.cells
 
         def maxRow=cells.max{
@@ -24,7 +24,7 @@ class InitialService {
             it.col
         }.col
 
-        def nextGeneration=new Generation(step: generation.step+1).save()
+        def nextGeneration=new Generation(step: generation.step+1,pattern:pattern).save()
 
         generation.cells.each{
             nextGeneration.addToCells(new Cell(row:it.row,col:it.col,isAlive: it.isAlive))
