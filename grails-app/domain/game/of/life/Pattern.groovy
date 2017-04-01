@@ -1,15 +1,16 @@
 package game.of.life
 
-class Generation {
+class Pattern {
 
     Long id
-    Long step
+    String name
 
-    static hasMany = [cells:Cell]
+    static hasMany = [generations:Generation]
 
     static mapping={
         version false
     }
+
 
     static constraints = {
     }
