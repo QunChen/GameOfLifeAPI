@@ -3,6 +3,7 @@ package game.of.life
 class BootStrap {
 
     def init = { servletContext ->
+
         initBlockPattern()
         initBoatPattern()
         initBlinkerPattern()

@@ -29,7 +29,7 @@ class GenerationController extends RestfulController<Generation> {
                             params.int('step')).cells
                     return
                 }else{
-                    respond targetStepGeneration.cells
+                    respond targetStepGeneration.cells.sort{it.id}
                     return
                 }
 
