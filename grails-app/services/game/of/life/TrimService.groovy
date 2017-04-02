@@ -17,41 +17,10 @@ class TrimService {
 
         def (int minRow, int maxRow, int minCol, int maxCol) = utilsService.getBoundaries(cells)
 
-        while(true){
-            def isRemoved=removeBoundaryCells(cells, minRow,"row", generation)
-            if(!isRemoved){
-                break
-            }else{
-                minRow++
-            }
-        }
-
-        while(true){
-            def isRemoved=removeBoundaryCells(cells, minCol,"col", generation)
-            if(!isRemoved){
-                break
-            }else{
-                minCol++
-            }
-        }
-
-        while(true){
-            def isRemoved=removeBoundaryCells(cells, maxCol,"col", generation)
-            if(!isRemoved){
-                break
-            }else{
-                maxCol--
-            }
-        }
-
-        while(true){
-            def isRemoved=removeBoundaryCells(cells, maxRow,"row", generation)
-            if(!isRemoved){
-                break
-            }else{
-                maxRow--
-            }
-        }
+        removeBoundaryCells(cells, minRow,"row", generation)
+        removeBoundaryCells(cells, minCol,"col", generation)
+        removeBoundaryCells(cells, maxCol,"col", generation)
+        removeBoundaryCells(cells, maxRow,"row", generation)
 
         generation.save()
     }
@@ -64,15 +33,13 @@ class TrimService {
      * @param generation
      * @return is the boundary removed
      */
-    private boolean removeBoundaryCells(cells, int boundaryValue,String type, generation) {
-        boolean isRemoved=false
+    private void removeBoundaryCells(cells, int boundaryValue,String type, generation) {
 
         if (!cells.findAll {
             it.properties[type] == boundaryValue
         }.any {
             it.isAlive == true
         }) {
-            isRemoved=true
             cells.findAll {
                 it.properties[type] == boundaryValue
             }.each {
@@ -81,7 +48,6 @@ class TrimService {
                 cell.delete()
             }
         }
-        isRemoved
     }
 
 }

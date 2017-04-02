@@ -15,8 +15,6 @@ class GenerationController extends RestfulController<Generation> {
 
     def index() {
 
-        println params
-
         if (params.patternId) {
 
             def pattern = Pattern.get(params.patternId)
@@ -38,7 +36,7 @@ class GenerationController extends RestfulController<Generation> {
             }
 
 
-            respond Generation.findAllByPattern(pattern)
+            respond Generation.findAllByPattern(pattern,["order":"id"])
 
             return
 
